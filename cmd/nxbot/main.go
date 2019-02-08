@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"log"
 
 	"github.com/jacknx/nxbot/internal/app/nxbot"
@@ -56,10 +57,10 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		data := buf.Bytes()
 		for _, r := range conf.TgMotionRecipients {
 			log.Printf("Sending motion event to: %s\n", r)
-			buf.Reset()
-			bot.SendPhoto(&nxbot.Recipient{ID: r}, buf)
+			bot.SendPhoto(&nxbot.Recipient{ID: r}, bytes.NewReader(data))
 		}
 	})
 
