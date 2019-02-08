@@ -57,6 +57,7 @@ func main() {
 			log.Fatal(err)
 		}
 		for _, r := range conf.TgMotionRecipients {
+			log.Printf("Sending motion event to: %s\n", r)
 			bot.SendPhoto(&nxbot.Recipient{ID: r}, buf)
 		}
 	})
