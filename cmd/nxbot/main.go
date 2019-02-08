@@ -58,10 +58,11 @@ func main() {
 		}
 		for _, r := range conf.TgMotionRecipients {
 			log.Printf("Sending motion event to: %s\n", r)
+			buf.Reset()
 			bot.SendPhoto(&nxbot.Recipient{ID: r}, buf)
 		}
 	})
 
-	log.Println("Starting Nx Telegram Bot and motion-event HTTP server")
+	log.Printf("Starting Nx Telegram Bot and motion-event HTTP server on port %s\n", conf.HTTPIPPort)
 	bot.Start()
 }

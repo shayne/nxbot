@@ -3,7 +3,6 @@ package nxapi
 import (
 	"bytes"
 	"fmt"
-	"io"
 	"net/http"
 )
 
@@ -24,7 +23,7 @@ func (a *API) GetCameras() ([]CameraInfo, error) {
 }
 
 // GetSnapshot returns raw image data from the Nx API for the given camera ID
-func (a *API) GetSnapshot(id string) (io.Reader, error) {
+func (a *API) GetSnapshot(id string) (*bytes.Buffer, error) {
 	req, err := a.newAPIRequest("GET", "cameraThumbnail")
 	if err != nil {
 		return nil, fmt.Errorf("GetSnapshot failed: %v", err)
